@@ -2,6 +2,7 @@
   "name": "uptime-monitor",
   "version": "0.0.1",
   "dependencies": {
+    "angular-smart-table": "^2.1.0",
     "body-parser": "^1.13.2",
     "express": "^4.13.1",
     "mongoose": "^4.0.7"
