@@ -6,6 +6,8 @@
     "body-parser": "^1.13.2",
     "express": "^4.13.1",
     "mongoose": "^4.0.7",
-    "node-libcurl": "^0.4.1"
+    "node-libcurl": "^0.4.1",
+    "nodemailer": "^1.4.0",
+    "nodemailer-smtp-pool": "^1.1.1"
   }
 }
