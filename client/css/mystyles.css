@@ -16,3 +16,7 @@ body {
     height: 59px;
     width: 400px;
 }
+
+.glyphicon {
+    font-size: 15px;
+}
