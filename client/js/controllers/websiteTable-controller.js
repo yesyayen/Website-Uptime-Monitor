@@ -31,12 +31,16 @@ app2.controller('websiteTable', ['$scope', '$resource', 'socket', function ($sco
 	});
 	
 	// Incoming
-	socket.on('onNoteCreated', function(data) {
+	socket.on('websiteStatus', function(data) {
 		$scope.webStatus = data;
 		if($scope.webResult != undefined)
 		{
 			$scope.webResult[$scope.webResult.length - 1].isUp = "true";
 		}	
+	});
+
+	socket.on('shabbaaaa', function(data) {
+		console.log("adasdasdasdasddadaasdsadadasd");	
 	});
 
 	// Outgoing - to server
