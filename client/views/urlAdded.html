@@ -45,7 +45,9 @@
                     <th>Mail ID</th>
                     <th>Mobile Number</th>
                     <th>Mobile Provider</th>
+                    <th>Status Code</th>
                     <th>Up/Down</th>
+                    <th>Response Time</th>
                 </tr>
             </thead>
             <tbody>
@@ -56,6 +58,7 @@
                     <td>{{row.mailID}}</td>
                     <td>{{row.mobileNumber}}</td>
                     <td>{{row.mobileProvider}}</td>
+                    <td>{{row.statusCode}}</td>
                     <td>
                         <div ng-switch on="row.isUp">
                             <span  class="btn btn-sm btn-success" ng-switch-when="true">
@@ -69,10 +72,10 @@
                             </span>
                         </div>
                     </td>
+                    <td>{{row.responseTime}}</td>
                 </tr>
             </tbody>
         </table>
-        <input type="text" placeholder="Up/Down" class="form-control" ng-model="webStatus" />
     </div>
 </body>
 

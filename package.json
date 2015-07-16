@@ -9,6 +9,7 @@
     "node-libcurl": "^0.4.1",
     "nodemailer": "^1.4.0",
     "nodemailer-smtp-pool": "^1.1.1",
-    "socket.mvc": "^0.2.0"
+    "socket.mvc": "^0.2.0",
+    "statuses": "^1.2.1"
   }
 }

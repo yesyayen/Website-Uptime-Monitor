@@ -32,10 +32,22 @@ app2.controller('websiteTable', ['$scope', '$resource', 'socket', function ($sco
 	
 	// Incoming
 	socket.on('websiteStatus', function(data) {
-		$scope.webStatus = data;
+		console.log($scope.webResult);
+		var i;
 		if($scope.webResult != undefined)
 		{
-			$scope.webResult[$scope.webResult.length - 1].isUp = "true";
+			for(i = 0; i < $scope.webResult.length; i++)
+			{
+				console.log($scope.webResult[i].name);
+				console.log(data.name);
+				if($scope.webResult[i].name.localeCompare(data.name) == 0)
+				{
+					break;
+				} 
+			}
+			$scope.webResult[i].statusCode = data.statusCode;
+			$scope.webResult[i].isUp = data.isUp;
+			$scope.webResult[i].responseTime = data.responseTime;
 		}	
 	});
 
