@@ -48,6 +48,7 @@
                     <th>Status Code</th>
                     <th>Up/Down</th>
                     <th>Response Time</th>
+                    <th>Delete  </th>
                 </tr>
             </thead>
             <tbody>
@@ -61,7 +62,7 @@
                     <td>{{row.statusCode}}</td>
                     <td>
                         <div ng-switch on="row.isUp">
-                            <span  class="btn btn-sm btn-success" ng-switch-when="true">
+                            <span class="btn btn-sm btn-success" ng-switch-when="true">
                                 <i class="glyphicon glyphicon-upload"></i>
                             </span>
                             <span class="btn btn-sm btn-success" ng-switch-when="false">
@@ -73,6 +74,11 @@
                         </div>
                     </td>
                     <td>{{row.responseTime}}</td>
+                    <td>
+                        <div class="buttons" ng-show="!row.$visible">
+                            <button class="btn btn-danger" ng-click="removeUser($index)">del</button>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>
