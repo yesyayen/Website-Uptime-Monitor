@@ -32,6 +32,7 @@ app2.controller('websiteTable', ['$scope', '$resource', 'socket', function($scop
     //query and get all the websites stored in DB
     Monitor.query(function(results) {
         $scope.webResult = results;
+        $scope.getArray = results;
     });
 
     // remove user - emits 'deleteWebsite' to server/routes/socket.js
