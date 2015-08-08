@@ -53,7 +53,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="row in webResult">
-                    <td>{{row.name}}</td>
+                    <td><a href="graphs">{{row.name}}</a></td>
                     <td>{{row.url}}</td>
                     <td>{{row.pollInterval}}</td>
                     <td>{{row.mailID}}</td>
@@ -76,7 +76,7 @@
                     <td>{{row.responseTime}}</td>
                     <td>
                         <div class="buttons" ng-show="!row.$visible">
-                            <button class="btn btn-danger" ng-click="removeUser($index)">del</button>
+                            <button class="btn btn-danger" ng-click="removeWebsite($index)">del</button>
                         </div>
                     </td>
                 </tr>

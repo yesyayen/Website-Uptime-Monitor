@@ -8,10 +8,6 @@ module.exports = function(socket) {
 
     sockets[socket.id] = socket; //appending the socket ID of the client to the array
 
-    socket.on('createNote', function(data) {
-        console.log(data);
-    });
-
     socket.on('deleteWebsite', function(data) {
     	removeWebsite(data);
         console.log(data);
