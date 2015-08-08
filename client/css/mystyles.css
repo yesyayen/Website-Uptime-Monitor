@@ -20,3 +20,13 @@ body {
 .glyphicon {
     font-size: 15px;
 }
+
+#chartdiv {
+	width	: 100%;
+	height	: 500px;
+}		
+
+#chartavaildiv {
+  width : 100%;
+  height  : 500px;
+}   
