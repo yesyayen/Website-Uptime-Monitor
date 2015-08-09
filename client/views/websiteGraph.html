@@ -25,6 +25,24 @@
     <script src="https://cdn.socket.io/socket.io-1.0.6.js"></script>
     <script src="/js/Chart.js"></script>
     <link rel="stylesheet" href="/css/angular-chart.css">
+     <!-- Bootstrap Core CSS -->
+    <link href="/js/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="/js/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Timeline CSS -->
+    <link href="/js/dist/css/timeline.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/js/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="/js/bower_components/morrisjs/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/js/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
 </head>
 
 <body>
@@ -42,12 +60,208 @@
             <!--/.nav-collapse -->
         </div>
     </div>
-    <div ng-controller="websiteGraph">
-        <button class="btn" ng-click="showgraph()">Graph</button>
+    <div ng-controller="websiteGraph" id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Dashboard - {{name}}</h1>
+            </div>
+                <!-- /.col-lg-12 -->
+        </div>
+            <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-2 col-md-9">
+            </div>
+            <div class="col-lg-4 col-md-9">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div style="font-size:25px;" class="col-xs-7 text-center">
+                                <div style="padding-top:7px;">Avg. Response Time</div>
+                                <i class="fa fa-spinner"></i>
+                            </div>
+                            <div class="col-xs-5 text-left">
+                                <div style="font-size:35px;">{{responseTime}}</div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-9">
+                <div class="panel panel-green">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div style="font-size:25px;" class="col-xs-7 text-center">
+                                <div style="padding-top:7px;">Availability</div>
+                                <i class="fa fa-check-square-o"></i>
+                            </div>
+                            <div class="col-xs-5 text-center">
+                                <div style="font-size:35px;">{{availability}}</div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-envelope fa-fw"></i> Website Details
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <ul class="chat">
+                            <li class="left clearfix">
+                                <div class="chat-body clearfix">
+                                    <div class="row">
+                                        <div  class="col-xs-2">
+                                            <div class="header" >
+                                                <strong class="primary-font" style="font-size:15px;">Website URL</strong>
+                                            </div>
+                                        </div>
+                                        <div  class="col-xs-10">
+                                            <p style="font-size:17px;">
+                                                {{name}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="left clearfix">
+                                <div class="chat-body clearfix">
+                                    <div class="row">
+                                        <div  class="col-xs-2">
+                                            <div class="header" >
+                                                <strong class="primary-font" style="font-size:15px;">Website URL</strong>
+                                            </div>
+                                        </div>
+                                        <div  class="col-xs-10">
+                                            <p style="font-size:17px;">
+                                                {{url}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="left clearfix">
+                                <div class="chat-body clearfix">
+                                    <div class="row">
+                                        <div  class="col-xs-2">
+                                            <div class="header" >
+                                                <strong class="primary-font" style="font-size:15px;">Alert Email-ID</strong>
+                                            </div>
+                                        </div>
+                                        <div  class="col-xs-10">
+                                            <p style="font-size:17px;">
+                                                {{email}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="left clearfix">
+                                <div class="chat-body clearfix">
+                                    <div class="row">
+                                        <div  class="col-xs-2">
+                                            <div class="header" >
+                                                <strong class="primary-font" style="font-size:15px;">Tracking Since</strong>
+                                            </div>
+                                        </div>
+                                        <div  class="col-xs-10">
+                                            <p style="font-size:17px;">
+                                                {{startTime}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="left clearfix">
+                                <div class="chat-body clearfix">
+                                    <div class="row">
+                                        <div  class="col-xs-2">
+                                            <div class="header" >
+                                                <strong class="primary-font" style="font-size:15px;">Gone Down</strong>
+                                            </div>
+                                        </div>
+                                        <div  class="col-xs-10">
+                                            <p style="font-size:17px;">
+                                                {{totalDowns}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            
+                            <li class="left clearfix">
+                                <div class="chat-body clearfix">
+                                    <div class="row">
+                                        <div  class="col-xs-2">
+                                            <div class="header" >
+                                                <strong class="primary-font" style="font-size:15px;">Poll Interval</strong>
+                                            </div>
+                                        </div>
+                                        <div  class="col-xs-10">
+                                            <p style="font-size:17px;">
+                                                {{pollInterval}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-8 -->
+            <div class="col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-bell fa-fw"></i> Notifications Panel
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="list-group" ng-repeat="row in downTime">
+                            <a href="#" class="list-group-item">
+                                <i class="fa fa-comment fa-fw"></i> row
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+                <!-- /.panel .chat-panel -->
+            </div>
+            <!-- /.col-lg-4 -->
+        </div>
+        <!-- /.row -->
+
+            <!-- Graph Row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-bar-chart-o fa-fw"></i> Area Chart Example
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div>
+                            
+                        </div>
+                        <div id="chartdiv"></div>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
     </div>
-    <div id="chartdiv"></div>
-    <br/>
-    <div id="chartavaildiv"></div>                                               
+    <!-- /#page-wrapper -->
 </body>
 
 </html>

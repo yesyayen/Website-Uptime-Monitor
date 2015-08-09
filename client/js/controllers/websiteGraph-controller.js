@@ -26,19 +26,19 @@ app3.factory('socket', function($rootScope) {
 //attaching socket to this JS file
 
 var chartData = [];
-var chartAvailableData = [];
 
 //<div ng-controller="websiteTable">   urlAdded.html
 app3.controller('websiteGraph', ['$scope', '$resource', 'socket', function($scope, $resource, socket) {
 
     //creates an API call specifically to get the name parameter. Mongo find operation
     var Monitor = $resource('/api/getGraphData/:name', {name: getParameterByName('q')});
+    var getWebsiteDetails = $resource('/api/website/:name', {name: getParameterByName('q')});
+
     var isUp = [];
+    var downTime = [];
     var upCount = 0;
     // get all the results from pings table
-    $scope.showgraph = function() {
         Monitor.query(function(results) {
-            console.log(results);
 
             var sum = 0.0;
             for (i = 0; i < results.length; i++) {
@@ -54,22 +54,32 @@ app3.controller('websiteGraph', ['$scope', '$resource', 'socket', function($scop
                 }
                 else
                 {
-                    isUp.push(0);   
+                    isUp.push(0);
+                    downTime.push(results[i].time);
                 }
 
                 chartData.push({
                     date: dateTime,
                     visits: results[i].responseTime
                 });
-
-                chartAvailableData.push({
-                    date: dateTime,
-                    visits: isUp
-                });
             }
+            $scope.downTime = downTime;
             console.log(sum/results.length);
+            $scope.responseTime = ((sum/results.length) * 1000).toFixed(2) + " ms";
             console.log((upCount/results.length) * 100);
-                
+            $scope.availability = (upCount/results.length) * 100 + " %";
+
+            $scope.totalDowns = (isUp.length - upCount) + " times";
+
+            getWebsiteDetails.query(function(results) {
+            console.log(results);
+            $scope.name = results[0].name;
+            $scope.url = results[0].url;
+            $scope.email = results[0].mailID;
+            $scope.startTime = results[0].addedTime;
+            $scope.pollInterval = results[0].pollInterval;
+
+            });
             //draw response chart
 
             var chart = AmCharts.makeChart("chartdiv", {
@@ -124,62 +134,10 @@ app3.controller('websiteGraph', ['$scope', '$resource', 'socket', function($scop
                 chart.zoomToIndexes(chartData.length - 250, chartData.length - 100);
             }
 
-            //chart for availability
-
-            var chartAvail = AmCharts.makeChart("chartavaildiv", {
-                "type": "serial",
-                "theme": "light",
-                "marginRight": 80,
-                "dataProvider": chartAvailableData,
-                "valueAxes": [{
-                    "position": "left",
-                    "title": "Available"
-                }],
-                "graphs": [{
-                    "id": "g1",
-                    "fillAlphas": 0.4,
-                    "valueField": "visits",
-                     "balloonText": "<div style='margin:5px; font-size:19px;'>Visits:<b>[[value]]</b></div>"
-                }],
-                "chartScrollbar": {
-                    "graph": "g1",
-                    "scrollbarHeight": 80,
-                    "backgroundAlpha": 0,
-                    "selectedBackgroundAlpha": 0.1,
-                    "selectedBackgroundColor": "#888888",
-                    "graphFillAlpha": 0,
-                    "graphLineAlpha": 0.5,
-                    "selectedGraphFillAlpha": 0,
-                    "selectedGraphLineAlpha": 1,
-                    "autoGridCount": true,
-                    "color": "#AAAAAA"
-                },
-                "chartCursor": {
-                    "categoryBalloonDateFormat": "JJ:NN, DD MMMM",
-                    "cursorPosition": "mouse"
-                },
-                "categoryField": "date",
-                "categoryAxis": {
-                    "minPeriod": "ss",
-                    "parseDates": true
-                },
-                "export": {
-                    "enabled": true
-                }
-            });
-
-            chartAvail.addListener("dataUpdated", zoomChart1);
             // when we apply theme, the dataUpdated event is fired even before we add listener, so
             // we need to call zoomChart here
-            zoomChart1();
-            // this method is called when chart is first inited as we listen for "dataUpdated" event
-            function zoomChart1() {
-                // different zoom methods can be used - zoomToIndexes, zoomToDates, zoomToCategoryValues
-                chartAvail.zoomToIndexes(chartAvailableData.length - 250, chartData.length - 100);
-            }
 
         });
-    };
 }]);
 
 
