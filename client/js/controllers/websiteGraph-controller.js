@@ -36,7 +36,9 @@ app3.controller('websiteGraph', ['$scope', '$resource', 'socket', function($scop
 
     var isUp = [];
     var downTime = [];
+    var upTime = [];
     var upCount = 0;
+    var downCount = 0;
     // get all the results from pings table
         Monitor.query(function(results) {
 
@@ -47,7 +49,7 @@ app3.controller('websiteGraph', ['$scope', '$resource', 'socket', function($scop
                 
                 sum+=  parseFloat(results[i].responseTime);
 
-                if(results[i].isUp)
+                if(results[i].isUp === "true")
                 {
                     isUp.push(1);
                     upCount+= 1;
@@ -55,6 +57,15 @@ app3.controller('websiteGraph', ['$scope', '$resource', 'socket', function($scop
                 else
                 {
                     isUp.push(0);
+                }
+
+                if(results[i].isStatusChange === "true" && results[i].isUp === "true")
+                {
+                    upTime.push(results[i].time);
+                }
+                else
+                {
+                    downCount+= 1;
                     downTime.push(results[i].time);
                 }
 
@@ -69,7 +80,7 @@ app3.controller('websiteGraph', ['$scope', '$resource', 'socket', function($scop
             console.log((upCount/results.length) * 100);
             $scope.availability = (upCount/results.length) * 100 + " %";
 
-            $scope.totalDowns = (isUp.length - upCount) + " times";
+            $scope.totalDowns = downCount + " times";
 
             getWebsiteDetails.query(function(results) {
             console.log(results);

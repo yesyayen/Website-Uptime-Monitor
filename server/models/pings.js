@@ -8,7 +8,8 @@ var pingSchema = new Schema(
 	websiteID: Schema.Types.ObjectId,
 	isUp: String,
 	statusCode: Number,
-	responseTime: Number
+	responseTime: Number,
+	isStatusChange: String
 });
 
 module.exports = mongoose.model('websitePing', pingSchema);
