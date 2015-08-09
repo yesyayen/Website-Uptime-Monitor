@@ -63,7 +63,7 @@ app3.controller('websiteGraph', ['$scope', '$resource', 'socket', function($scop
                 {
                     upTime.push(results[i].time);
                 }
-                else
+                else if(results[i].isStatusChange === "false" && results[i].isUp === "false")
                 {
                     downCount+= 1;
                     downTime.push(results[i].time);
