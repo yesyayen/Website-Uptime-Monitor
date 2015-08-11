@@ -52,7 +52,7 @@ Installation Steps
 
         nohup node app.js &
 
-6. Open your browser and go to 127.0.0.1:8002(127.0.0.1:8002)
+6. Open your browser and go to 127.0.0.1:8002(http://127.0.0.1:8002)
 
 7. You can see the homepage
 
