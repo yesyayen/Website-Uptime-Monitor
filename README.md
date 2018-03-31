@@ -1,8 +1,6 @@
 # Website-Uptime-Monitor
 Website availability and response time monitoring tool, built using MEAN stack
 
-Watch demo here - Demo(https://vimeo.com/135819736)
-
 Packages
 ---------
     "angular-smart-table": "^2.1.0",
